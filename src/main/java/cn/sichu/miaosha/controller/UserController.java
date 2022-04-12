@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.sichu.miaosha.controller.viewobject.UserVO;
+import cn.sichu.miaosha.error.BusinessException;
+import cn.sichu.miaosha.error.EnumError;
+import cn.sichu.miaosha.response.CommonReturnType;
 import cn.sichu.miaosha.service.UserService;
 import cn.sichu.miaosha.service.model.UserModel;
 
@@ -19,7 +22,7 @@ import cn.sichu.miaosha.service.model.UserModel;
  */
 @Controller("user")
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -29,15 +32,25 @@ public class UserController {
      * 
      * @param id
      * @return
+     * @throws BusinessException
      */
     @RequestMapping("/get")
     @ResponseBody
-    public UserVO getUser(@RequestParam(name = "id") Integer id) {
+    public CommonReturnType getUser(@RequestParam(name = "id") Integer id) throws BusinessException {
         // 调用service服务获取对应id的用户对象并返回给前端
         UserModel userModel = userService.getUserById(id);
 
+        // 若获取的用户信息不存在
+        if (userModel == null) {
+            throw new BusinessException(EnumError.USER_NOT_EXIST);
+            // userModel.setEncryptPassword("123");
+        }
+
         // 将核心领域模型用户对象转换成可供UI使用的viewobject
-        return convertFromModel(userModel);
+        UserVO userVO = convertFromModel(userModel);
+
+        // 返回通用对象
+        return CommonReturnType.create(userVO);
     }
 
     private UserVO convertFromModel(UserModel userModel) {
@@ -48,4 +61,5 @@ public class UserController {
         BeanUtils.copyProperties(userModel, userVO);
         return userVO;
     }
+
 }
