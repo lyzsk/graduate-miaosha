@@ -1,0 +1,122 @@
+.login-wallpaper {
+    width: 250px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.login-form {
+    position: relative;
+    padding: 60px 30px 5px;
+    width: 250px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: -10px -10px 20px rgba(0, 0, 0, 0.01) inset,
+      10px 10px 30px rgba(255, 255, 255, 0.1) inset,
+      5px 5px 20px rgba(0, 0, 0, 0.05);
+  }
+.login-form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 16px;
+}
+.login-form-row input {
+    padding: 0 10px;
+    height: 32px;
+    flex: 1;
+    background: none;
+    border-radius: 16px;
+    color: #fff;
+    outline: none;
+}
+.login-form-row input::-webkit-input-placeholder {
+    color: #fff;
+}
+.login-form-btn {
+    margin: 10px auto;
+    width: 80px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 16px;
+    background: rgb(82, 116, 189);
+}
+.login-floating {
+    position: absolute;
+    border-radius: 100%;
+}
+.login-floating:nth-child(1) {
+    background: rgb(253, 200, 100);
+    top: 150px;
+    left: -55px;
+    animation: move 10s infinite ease-in-out;
+}
+.login-floating:nth-child(2) {
+    background: rgb(160, 201, 247);
+    top: -20px;
+    left: 180px;
+    z-index: 3;
+    animation: move2 4s infinite ease-in;
+    animation-delay: 0.3s;
+}
+.login-floating:nth-child(3) {
+    background: rgb(247, 160, 233);
+    top: 170px;
+    left: 190px;
+    animation: zoom 1.5s infinite ease-in;
+    animation-delay: 0.6s;
+}
+.small {
+    width: 40px;
+    height: 40px;
+}
+.middle {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+.lg {
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+}
+@keyframes move {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-180px);
+    }
+}
+@keyframes move2 {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-30px);
+    }
+}
+@keyframes zoom {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+}
+.glass {
+    backdrop-filter: blur(10px);
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    border-left: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+}
