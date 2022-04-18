@@ -1,122 +1,234 @@
-.login-wallpaper {
-    width: 250px;
-    background-color: rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400|Lora");
+
+body {
+  background: #cbc0d3;
 }
-.login-form {
-    position: relative;
-    padding: 60px 30px 5px;
-    width: 250px;
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: -10px -10px 20px rgba(0, 0, 0, 0.01) inset,
-      10px 10px 30px rgba(255, 255, 255, 0.1) inset,
-      5px 5px 20px rgba(0, 0, 0, 0.05);
-  }
-.login-form-row {
+#plane{
+    color: #fff;
+    font-size: 70px;
+    /* 绝对定位 */
+    position: absolute;
+    /* 弹性布局 水平+垂直居中 */
     display: flex;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
-    color: #fff;
-    font-size: 16px;
 }
-.login-form-row input {
-    padding: 0 10px;
-    height: 32px;
-    flex: 1;
-    background: none;
-    border-radius: 16px;
-    color: #fff;
-    outline: none;
+/* 容器的样式 */
+.container {
+  margin: auto;
+  width: 650px;
+  height: 550px;
+  position: relative;
 }
-.login-form-row input::-webkit-input-placeholder {
-    color: #fff;
+
+.welcome {
+  background: #f6f6f6;
+  width: 650px;
+  height: 415px;
+  position: absolute;
+  top: 25%;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 }
-.login-form-btn {
-    margin: 10px auto;
-    width: 80px;
-    height: 32px;
-    line-height: 32px;
-    font-size: 12px;
-    color: #fff;
-    cursor: pointer;
-    border: none;
-    border-radius: 16px;
-    background: rgb(82, 116, 189);
+
+.pinkbox {
+  position: absolute;
+  top: -10%;
+  left: 5%;
+  background: #eac7cc;
+  width: 320px;
+  height: 500px;
+  border-radius: 5px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease-in-out;
+  z-index: 2;
 }
-.login-floating {
-    position: absolute;
-    border-radius: 100%;
+
+.nodisplay {
+  display: none;
+  transition: all 0.5s ease;
 }
-.login-floating:nth-child(1) {
-    background: rgb(253, 200, 100);
-    top: 150px;
-    left: -55px;
-    animation: move 10s infinite ease-in-out;
+
+.leftbox, .rightbox {
+  position: absolute;
+  width: 50%;
+  transition: 1s all ease;
 }
-.login-floating:nth-child(2) {
-    background: rgb(160, 201, 247);
-    top: -20px;
-    left: 180px;
-    z-index: 3;
-    animation: move2 4s infinite ease-in;
-    animation-delay: 0.3s;
+
+.leftbox {
+  left: -2%;
 }
-.login-floating:nth-child(3) {
-    background: rgb(247, 160, 233);
-    top: 170px;
-    left: 190px;
-    animation: zoom 1.5s infinite ease-in;
-    animation-delay: 0.6s;
+
+.rightbox {
+  right: -2%;
 }
-.small {
-    width: 40px;
-    height: 40px;
+
+/* 字体和按钮的样式 */
+h1 {
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+  margin-top: 95px;
+  text-transform: uppercase;
+  color: #f6f6f6;
+  font-size: 2em;
+  letter-spacing: 8px;
 }
-.middle {
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
+
+.title {
+  font-family: "Lora", serif;
+  color: #8e9aaf;
+  font-size: 1.8em;
+  line-height: 1.1em;
+  letter-spacing: 3px;
+  text-align: center;
+  font-weight: 300;
+  margin-top: 20%;
 }
-.lg {
-    width: 120px;
-    height: 120px;
-    border-radius: 100%;
+
+.desc {
+  margin-top: -8px;
 }
-@keyframes move {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-180px);
-    }
+
+.account {
+  margin-top: 45%;
+  font-size: 10px;
 }
-@keyframes move2 {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-30px);
-    }
+
+p {
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.7em;
+  letter-spacing: 2px;
+  color: #8e9aaf;
+  text-align: center;
 }
-@keyframes zoom {
-    0%,
-    100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.9);
-    }
+
+span {
+  color: #eac7cc;
 }
-.glass {
-    backdrop-filter: blur(10px);
-    border: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
-    border-left: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+
+.apple {
+  position: absolute;
+  width: 93px;
+  height: 136px;
+  top: 42%;
+  left: 35%;
+  opacity: 0.8;
+}
+
+.smaller {
+  width: 93px;
+  height: 136px;
+  top: 42%;
+  left: 35%;
+  opacity: 0.8;
+}
+
+button {
+  padding: 12px;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 11px;
+  border-radius: 10px;
+  margin: auto;
+  outline: none;
+  display: block;
+}
+
+button:hover {
+  background: #eac7cc;
+  color: #f6f6f6;
+  transition: background-color 1s ease-out;
+}
+
+.button {
+  margin-top: 3%;
+  background: #f6f6f6;
+  color: #ce7d88;
+  border: solid 1px #eac7cc;
+}
+
+/* 表单样式 */
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 7px;
+}
+
+.more-padding {
+  padding-top: 35px;
+}
+
+.more-padding input {
+  padding: 12px;
+}
+
+.more-padding .sumbit {
+  margin-top: 45px;
+}
+
+.sumbit {
+  margin-top: 25px;
+  padding: 12px;
+  border-color: #ce7d88;
+}
+
+.sumbit:hover {
+  background: #cbc0d3;
+  border-color: #bfb1c9;
+}
+
+input {
+  background: #eac7cc;
+  width: 65%;
+  color: #ce7d88;
+  border: none;
+  border-bottom: 1px solid rgba(246, 246, 246, 0.5);
+  padding: 9px;
+  font-weight: 100;
+}
+
+input::placeholder {
+  color: #f6f6f6;
+  letter-spacing: 2px;
+  font-size: 1.0em;
+  font-weight: 100;
+}
+
+input:focus {
+  color: #ce7d88;
+  outline: none;
+  border-bottom: 1.2px solid rgba(206, 125, 136, 0.7);
+  font-size: 1.0em;
+  transition: 0.8s all ease;
+}
+
+input:focus::placeholder {
+  opacity: 0;
+}
+
+label {
+  font-family: "Open Sans", sans-serif;
+  color: #ce7d88;
+  font-size: 0.8em;
+  letter-spacing: 1px;
+}
+
+.checkbox {
+  display: inline;
+  white-space: nowrap;
+  position: relative;
+  left: -52px;
+  top: 25px;
+}
+
+input[type=checkbox] {
+  width: 15px;
+  background: #ce7d88;
+}
+
+.checkbox input[type=checkbox]:checked + label {
+  color: #ce7d88;
+  transition: 0.5s all ease;
 }
