@@ -1,9 +1,12 @@
 package cn.sichu.miaosha.controller;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.druid.util.StringUtils;
+
 import cn.sichu.miaosha.controller.viewobject.UserVO;
 import cn.sichu.miaosha.error.BusinessException;
 import cn.sichu.miaosha.error.EnumError;
@@ -21,14 +26,19 @@ import cn.sichu.miaosha.service.UserService;
 import cn.sichu.miaosha.service.model.UserModel;
 
 /**
- * "@CrossOrigin"跨域
+ * "@CrossOrigin"跨域, 但是在ajax请求中没法做到共享，所以inSessionOtpCode不能正确传到
+ * <p>
+ * 解决办法: 设置crossorigin的范围
+ * <p>
+ * "@CrossOrigin" 源码中的DEFAULT_ALLOWED_HEADERS允许跨域传输所有的header参数，将用于使用token放入header域做session共享的跨域请求(@deprecated as of
+ * Spring 5.0,)
  * 
  * @author sichu
  * @date 2022/04/12
  */
 @Controller("user")
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true", allowedHeaders = "*")
 public class UserController extends BaseController {
 
     @Autowired
@@ -40,6 +50,52 @@ public class UserController extends BaseController {
      */
     @Autowired
     private HttpServletRequest httpServletRequest;
+
+    /**
+     * 用户注册接口
+     * 
+     * @throws BusinessException
+     */
+    @RequestMapping(value = "/loginRegister", method = {RequestMethod.POST}, consumes = {CONTENT_TYPE_FORMED})
+    @ResponseBody
+    public CommonReturnType register(@RequestParam(name = "telephone") String telephone,
+        @RequestParam(name = "otpCode") String otpCode, @RequestParam(name = "name") String name,
+        @RequestParam(name = "gender") Integer gender, @RequestParam(name = "age") Integer age,
+        @RequestParam(name = "password") String password) throws BusinessException {
+
+        // 验证手机号和对应的 otpcode 相符合
+        String inSessionOtpCode = (String)this.httpServletRequest.getSession().getAttribute(telephone);
+        if (StringUtils.equals(otpCode, inSessionOtpCode)) {
+            throw new BusinessException(EnumError.PARAMETER_VALIDATION_ERROR, "短信验证码不符合");
+        }
+
+        // 用户注册流程
+        // 需要添加对应的 Service
+        UserModel userModel = new UserModel();
+        userModel.setName(name);
+        userModel.setGender(new Byte(String.valueOf(gender.intValue())));
+        userModel.setAge(age);
+        userModel.setTelephone(telephone);
+        userModel.setRegisterMode("byphone");
+        // 防止明文传password
+        userModel.setEncryptPassword(this.EncodeByMd5(password));
+
+        userService.register(userModel);
+        return CommonReturnType.create(null);
+    }
+
+    public String EncodeByMd5(String str) {
+        // 确定计算方法
+        MessageDigest md5 = null;
+        try {
+            md5 = MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        Base64 base64 = null;
+        String newstr = base64.encodeBase64String(md5.digest(str.getBytes()));
+        return newstr;
+    }
 
     /**
      * 用户获取otp短信接口
