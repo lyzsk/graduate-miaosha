@@ -17,7 +17,7 @@
 
 # Intro
 - !施工中!
-- 前端 HTML+CSS 复习，做了 glass effect, 页面里内嵌纸飞机 mouse tracking
+- 前端 HTML+CSS 复习，做了 glass effect, 页面里内嵌纸飞机 mouse tracking, login && register 页面 slide effect
 - [(Back to top)](#JAVA-SpringBoot+jQuery+HTML+CSS-miaosha)
 
 # Installation
