@@ -7,11 +7,7 @@
 - [How to use](#how-to-use)
 
 # Screenshoot
-![Image text](https://github.com/lyzsk/graduate-miaosha/blob/master/Screenshoot/login_page.png)
-
-![Image text](https://github.com/lyzsk/graduate-miaosha/blob/master/Screenshoot/register_page.png)
-
-![Image text](https://github.com/lyzsk/graduate-miaosha/blob/master/Screenshoot/getotp_page.png)
+![Image text](https://github.com/lyzsk/graduate-miaosha/blob/master/Screenshoot/otp_register.gif)
 
 - [(Back to top)](#JAVA-SpringBoot+jQuery+HTML+CSS-miaosha)
 
