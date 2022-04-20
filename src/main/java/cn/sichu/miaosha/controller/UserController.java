@@ -38,7 +38,7 @@ import cn.sichu.miaosha.service.model.UserModel;
  */
 @Controller("user")
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://localhost:8080", allowCredentials = "true", allowedHeaders = "*")
+@CrossOrigin
 public class UserController extends BaseController {
 
     @Autowired
